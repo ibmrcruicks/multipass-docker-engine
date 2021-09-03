@@ -1,4 +1,5 @@
 # multipass-docker-engine
+
 Using hyperkit to create a local Docker Engine for macOS to replace Docker Desktop.
 
 After Docker [announced changes](https://www.docker.com/blog/updating-product-subscriptions/) to the subscription model for Docker on mac OS (Docker Desktop, also affects Docker Desktop for Windows), you might want to try out a lightweight Linux-based "container" to run Docker Engine, without needing to install, licence, and configure VirtualBox, VMware Fusion, or similar virtual machine managers.
@@ -8,6 +9,7 @@ macOS provides Hyperkit, based on [xhyve](https://github.com/machyve/xhyve) whic
 [Ubuntu Multipass](https://multipass.run/) provides lightweight Linux container environment that can run on macOS using Hyperkit (in fact, it's the default).
 
 ## Install Ubuntu Multipass
+
 Follow the download and installation instructions at https://multipass.run/ or install via brew (`brew install --cask multipass`), and bring up your Docker Engine "host":
 ```
 $ multipass launch --name docker-host
@@ -25,6 +27,7 @@ DNS=8.8.8.8
 ```
 
 ## Installing Docker Engine
+
 Docker provides a couple of options for [installing Docker Engine](https://docs.docker.com/engine/install/ubuntu/):
  1. set up `apt` to recognise Docker repositories, and install via `sudo apt-get install`
  2. download `.deb` package files directly from Docker and install via `sudo dpkg -i`
@@ -92,6 +95,7 @@ For more examples and ideas, visit:
 And Docker Engine is up and running.
 
 ## Configure Docker Engine for macOS access
+
 By default, Docker Engine is configured to only run using the local sock interface; to be able to use from you macOS docker cli, you will need to configure Docker Engine to listen over TCP.
 
 Docker Engine is installed as a systemd-managed service - the systemd config needs to be [modified for TCP connections](https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot) with a couple of steps:
@@ -140,6 +144,7 @@ Mounts:         --
 Docker Engine will now accept commands from a remote docker client (like the one you use in your macOS terminal).
 
 ## Stop/Start your Docker Engine
+
 Much like Docker Desktop, your multipass docker-host instance needs to be running before any clients can make use of it:
 
 ```
@@ -182,6 +187,10 @@ The following command will spin up an instance with 2 CPUs, 4 GB RAM and 20 GB h
 ```
 $ multipass launch -c 2 -m 4G -d 20G -n big-docker-host
 ```
+
+### Added Bonus!
+
+Not sure why you might want to be able to do this, but Multipass instances mean you couuld run multiple docker engines on the same system; this might be useful for sizing instance for running containers, and other for building. 
 
 ## Feedback
 Comments on your experiences welcome via Issues.
