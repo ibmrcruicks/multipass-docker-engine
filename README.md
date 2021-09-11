@@ -165,13 +165,14 @@ You can also use the Multipass GUI control from the menu-bar:
 
 From a macOS terminal run the docker command 
 ```
-$ DOCKER_HOST=<docker-host-IPv4-address> docker images
+$ DOCKER_HOST=tcp://<docker-host-IPv4-address>:2375 docker images
 REPOSITORY    TAG       IMAGE ID       CREATED             SIZE
 hello-world   latest    d1165f221234   6 months ago        13.3kB
 ```
 To more permanently direct your docker client to your multipass docker-host instance, add
 ```
-export DOCKER_HOST=<docker-host-IPv4-address>
+DOCKER_HOST=tcp://<docker-host-IPv4-address>:2375
+export DOCKER_HOST
 ```
 to your `~/.bashrc` and/or `~/.zshrc`
 
